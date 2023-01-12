@@ -5,7 +5,15 @@ function Navbar() {
   const navigate = useNavigate()
   const [login, setLogin] = useState(false)
   const width = window.innerWidth
-
+  const checkLogin = (e) => {
+    e.preventDefault()
+    if (login) {
+      navigate('/member')
+    } else {
+      alert('請先登入！')
+      navigate('/login')
+    }
+  }
   return (
     <>
       {width > 390 ? (
@@ -44,6 +52,13 @@ function Navbar() {
             >
               News
             </Link>
+            <Link
+              to="/member"
+              className="font-medium transition hover:text-blue-600"
+              onClick={(e) => checkLogin(e)}
+            >
+              Member
+            </Link>
           </div>
           <div className="right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md">
             {login ? (
@@ -61,7 +76,7 @@ function Navbar() {
             ) : (
               <div className="flex items-center space-x-2 p-2">
                 <img
-                  src="https://plchldr.co/i/40x40?bg=111111"
+                  src="https://dotown.maeda-design-room.net/wp-content/uploads/2022/07/food_saucebottle_01.png"
                   alt="plchldr.co"
                   className="h-9 w-9 rounded-full"
                 />
