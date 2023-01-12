@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function Login() {
+  const navigate = useNavigate()
   const autoLogin = {
     email: 'bambi0521@gmail.com',
     password: '0521',
@@ -33,8 +34,13 @@ function Login() {
       loginInfo
     )
 
-    // const res = await axios.get('http://localhost:3005/member/login/api')
-    console.log(res.data)
+    // console.log(res.data)
+    if (res.data.success) {
+      alert('登入成功(๑¯◡¯๑)')
+      navigate('/')
+    } else {
+      alert('登入失敗！')
+    }
   }
 
   return (
@@ -62,6 +68,7 @@ function Login() {
               placeholder="請輸入您的帳號"
               value={loginInfo.email}
               onChange={(e) => updateLoginInfo(e)}
+              required={true}
             />
           </div>
           <div className="w-full">
@@ -79,6 +86,7 @@ function Login() {
               placeholder="••••••••"
               value={loginInfo.password}
               onChange={(e) => updateLoginInfo(e)}
+              required={true}
             />
           </div>
           <div className="w-full flex justify-between">

@@ -37,23 +37,38 @@ function Register() {
       ...registerInfo,
       [e.target.name]: e.target.value,
     })
+    console.log(e.target.value)
   }
 
   const memberRegister = async (e) => {
     e.preventDefault()
-    console.log(registerInfo)
-    console.log(agreePolicy)
+    // console.log(registerInfo)
+    // console.log(agreePolicy)
 
     if (agreePolicy) {
-      //   const res = await axios.post(
-      //     'http://localhost:3005/member/register/api',
-      //     registerInfo
-      //   )
-      //   console.log(res.data)
-      console.log('abc')
+      if (checkEmailValid(registerInfo.email)) {
+        const res = await axios.post(
+          'http://localhost:3005/member/register/api',
+          registerInfo
+        )
+        console.log(res.data)
+        alert('註冊成功≖‿≖')
+      } else {
+        alert('Please enter valid email address')
+      }
     } else {
       alert('Please agree to Register Policy')
     }
+  }
+
+  // regexp
+  // reference: https://ithelp.ithome.com.tw/articles/10094951
+  const checkEmailValid = (email) => {
+    const validEmail =
+      /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+    let emailIsValid = false
+    if (email.search(validEmail) != -1) emailIsValid = true
+    return emailIsValid
   }
 
   return (
