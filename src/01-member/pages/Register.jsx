@@ -5,15 +5,18 @@ import axios from 'axios'
 
 function Register() {
   const today = dayjs(new Date()).format('YYYY-MM-DD')
-
   const [registerInfo, setRegisterInfo] = useState({
     email: '',
     password: '',
     nickname: '',
     birthday: '',
   })
+  const [pwVisibility, setPwVisiblity] = useState(false)
+
+  const togglePwVisibility = () => setPwVisiblity(!pwVisibility)
 
   const [agreePolicy, setAgreePolicy] = useState(false)
+
   const toggleAgree = () => setAgreePolicy(!agreePolicy)
 
   const autoRegister = {
@@ -100,7 +103,7 @@ function Register() {
               required={true}
             />
           </div>
-          <div className="w-full">
+          <div className="w-full relative">
             <label
               htmlFor="password"
               className="text-sm font-medium text-gray-900 mb-2 block"
@@ -112,12 +115,18 @@ function Register() {
               className="bg-gray-50 border-gray-300 border text-sm rounded-lg w-full p-2.5"
               name="password"
               id="password"
-              type="password"
+              type={pwVisibility ? 'text' : 'password'}
               placeholder="••••••••"
               value={registerInfo.password}
               onChange={updateRegisterInfo}
               required={true}
             />
+            <i
+              className={`absolute right-4 mt-3 text-gray-500 hover:text-blue-500 fa-regular ${
+                pwVisibility ? 'fa-eye-slash' : 'fa-eye'
+              }`}
+              onClick={togglePwVisibility}
+            ></i>
           </div>
           <div className="w-full">
             <label

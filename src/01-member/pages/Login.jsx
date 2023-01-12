@@ -4,6 +4,11 @@ import axios from 'axios'
 
 function Login() {
   const navigate = useNavigate()
+
+  const [pwVisibility, setPwVisiblity] = useState(false)
+
+  const togglePwVisibility = () => setPwVisiblity(!pwVisibility)
+
   const autoLogin = {
     email: 'bambi0521@gmail.com',
     password: '0521',
@@ -71,7 +76,7 @@ function Login() {
               required={true}
             />
           </div>
-          <div className="w-full">
+          <div className="w-full relative">
             <label
               htmlFor="password"
               className="text-sm font-medium text-gray-900 mb-2 block"
@@ -82,12 +87,18 @@ function Login() {
               className="bg-gray-50 border-gray-300 border text-sm rounded-lg w-full p-2.5"
               name="password"
               id="password"
-              type="password"
+              type={pwVisibility ? 'text' : 'password'}
               placeholder="••••••••"
               value={loginInfo.password}
               onChange={(e) => updateLoginInfo(e)}
               required={true}
             />
+            <i
+              className={`absolute right-4 mt-3 text-gray-500 hover:text-blue-500 fa-regular ${
+                pwVisibility ? 'fa-eye-slash' : 'fa-eye'
+              }`}
+              onClick={togglePwVisibility}
+            ></i>
           </div>
           <div className="w-full flex justify-between">
             <div className="flex items-start">
