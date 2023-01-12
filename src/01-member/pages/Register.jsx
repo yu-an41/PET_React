@@ -1,42 +1,87 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
+import axios from 'axios'
 
 function Register() {
-  const autoFillLogin = () => {}
+  const today = dayjs(new Date()).format('YYYY-MM-DD')
+
   const [registerInfo, setRegisterInfo] = useState({
-    account: '',
+    email: '',
     password: '',
     nickname: '',
-    birthday: '1990-00-00',
-    email: '',
+    birthday: '',
   })
+
+  const [agreePolicy, setAgreePolicy] = useState(false)
+  const toggleAgree = () => setAgreePolicy(!agreePolicy)
+
+  const autoRegister = {
+    email: 'test123@gmail.com',
+    password: '0228',
+    nickname: '阿極',
+    birthday: '',
+  }
+
+  const autoFillRegister = () => {
+    setRegisterInfo({
+      email: autoRegister.email,
+      password: autoRegister.password,
+      nickname: autoRegister.nickname,
+      birthday: autoRegister.birthday,
+    })
+  }
+
+  const updateRegisterInfo = (e) => {
+    setRegisterInfo({
+      ...registerInfo,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const memberRegister = async (e) => {
+    e.preventDefault()
+    console.log(registerInfo)
+    console.log(agreePolicy)
+
+    if (agreePolicy) {
+      //   const res = await axios.post(
+      //     'http://localhost:3005/member/register/api',
+      //     registerInfo
+      //   )
+      //   console.log(res.data)
+      console.log('abc')
+    } else {
+      alert('Please agree to Register Policy')
+    }
+  }
 
   return (
     <div className="max-w-2xl mx-auto pt-2">
       <div className="bg-white shadow-md border border-gray-200 rounded-lg mx-auto max-w-sm p-4 sm:p-6 lg:p-8">
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={memberRegister}>
           <h3
             className="text-xl font-medium text-gray-900 dark:text-white"
-            onDoubleClick={autoFillLogin}
+            onClick={autoFillRegister}
           >
             現在就加入我們！
           </h3>
           <div className="w-full">
             <label
-              htmlFor="account"
+              htmlFor="email"
               className="text-sm font-medium text-gray-900 mb-2 block"
             >
-              帳號
+              信箱
               <span className="ml-1 text-red-600 font-medium">*</span>
             </label>
             <input
               className="bg-gray-50 border-gray-300 border text-sm rounded-lg w-full p-2.5"
-              name="account"
-              id="account"
-              type="text"
-              placeholder="請輸入您的帳號"
-              value=""
-              onChange=""
+              name="email"
+              id="email"
+              type="email"
+              placeholder="abc@xxxx.com.tw"
+              value={registerInfo.email}
+              onChange={updateRegisterInfo}
               required={true}
             />
           </div>
@@ -54,26 +99,9 @@ function Register() {
               id="password"
               type="password"
               placeholder="••••••••"
-              value=""
-              onChange=""
+              value={registerInfo.password}
+              onChange={updateRegisterInfo}
               required={true}
-            />
-          </div>
-          <div className="w-full">
-            <label
-              htmlFor="email"
-              className="text-sm font-medium text-gray-900 mb-2 block"
-            >
-              信箱
-            </label>
-            <input
-              className="bg-gray-50 border-gray-300 border text-sm rounded-lg w-full p-2.5"
-              name="email"
-              id="email"
-              type="email"
-              placeholder="abc@xxxx.com.tw"
-              value=""
-              onChange=""
             />
           </div>
           <div className="w-full">
@@ -89,8 +117,8 @@ function Register() {
               id="nickname"
               type="text"
               placeholder="我是斑比"
-              value=""
-              onChange=""
+              value={registerInfo.nickname}
+              onChange={updateRegisterInfo}
             />
           </div>
           <div className="w-full">
@@ -105,8 +133,10 @@ function Register() {
               name="birthday"
               id="birthday"
               type="date"
-              value=""
-              onChange=""
+              min="1900-01-01"
+              max={today}
+              value={registerInfo.birthday}
+              onChange={updateRegisterInfo}
             />
           </div>
           <div className="w-full flex justify-between">
@@ -117,7 +147,8 @@ function Register() {
                   name="agree"
                   type="checkbox"
                   className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
-                  required={true}
+                  value={agreePolicy}
+                  onChange={toggleAgree}
                 />
               </div>
               <div className="text-sm ml-3">
@@ -146,10 +177,10 @@ function Register() {
             代表為必填欄位 ）
           </p>
           <div className="flex itmes-start">
-            <p className="font-medium text-gray-600 mr-auto">
+            <p className="font-medium text-gray-600 mr-3">
               Already have an account?
             </p>
-            <Link className="font-medium text-blue-700 mr-3" to="/login">
+            <Link className="font-medium text-blue-700" to="/login">
               Login
             </Link>
           </div>

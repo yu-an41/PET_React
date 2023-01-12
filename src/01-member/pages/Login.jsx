@@ -4,44 +4,39 @@ import axios from 'axios'
 
 function Login() {
   const autoLogin = {
-    account: 'bambi0521',
+    email: 'bambi0521@gmail.com',
     password: '0521',
   }
   const [loginInfo, setLoginInfo] = useState({
-    account: '',
+    email: '',
     password: '',
   })
   const autoFillLogin = () => {
     setLoginInfo({
-      account: autoLogin.account,
-      password: autoLogin.account,
+      email: autoLogin.email,
+      password: autoLogin.password,
     })
   }
 
-  const updateLoginAccount = (e) => {
+  const updateLoginInfo = (e) => {
     setLoginInfo({
       ...loginInfo,
-      account: e.target.value,
+      [e.target.name]: e.target.value,
     })
-    // console.log(e.target.value)
   }
 
-  const updateLoginPassword = (e) => {
-    setLoginInfo({
-      ...loginInfo,
-      password: e.target.value,
-    })
-    // console.log(e.target.value)
-  }
   const memberLogin = async (e) => {
-    // e.preventDefault()
-    // console.log(loginInfo)
+    e.preventDefault()
+    console.log(loginInfo)
     const res = await axios.post(
       'http://localhost:3005/member/login/api',
       loginInfo
     )
-    console.log(res)
+
+    // const res = await axios.get('http://localhost:3005/member/login/api')
+    console.log(res.data)
   }
+
   return (
     <div className="max-w-2xl mx-auto pt-4">
       <div className="bg-white shadow-md border border-gray-200 rounded-lg mx-auto max-w-sm p-4 sm:p-6 lg:p-8">
@@ -54,19 +49,19 @@ function Login() {
           </h3>
           <div className="w-full">
             <label
-              htmlFor="account"
+              htmlFor="email"
               className="text-sm font-medium text-gray-900 mb-2 block"
             >
               帳號
             </label>
             <input
               className="bg-gray-50 border-gray-300 border text-sm rounded-lg w-full p-2.5"
-              name="account"
-              id="account"
+              name="email"
+              id="email"
               type="text"
               placeholder="請輸入您的帳號"
-              value={loginInfo.account}
-              onChange={(e) => updateLoginAccount(e)}
+              value={loginInfo.email}
+              onChange={(e) => updateLoginInfo(e)}
             />
           </div>
           <div className="w-full">
@@ -83,7 +78,7 @@ function Login() {
               type="password"
               placeholder="••••••••"
               value={loginInfo.password}
-              onChange={(e) => updateLoginPassword(e)}
+              onChange={(e) => updateLoginInfo(e)}
             />
           </div>
           <div className="w-full flex justify-between">
@@ -91,9 +86,8 @@ function Login() {
               <div className="flex items-center h-5">
                 <input
                   id="remember"
-                  aria-describedby="remember"
                   type="checkbox"
-                  className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                  className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
                   required=""
                 />
               </div>
@@ -119,7 +113,7 @@ function Login() {
             type="submit"
             className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
-            Login to your account
+            Login to your email
           </button>
           <div className="flex itmes-start">
             <p className="font-medium text-gray-600 mr-3">Not registered?</p>
