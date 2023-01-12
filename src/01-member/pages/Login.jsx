@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-// import AuthContext from './../../contexts/AuthContext'
+import AuthContext from './../../contexts/AuthContext'
 
-function Login(props) {
-  // const { loginInfo, setLoginInfo } = useContext(AuthContext)
-
+function Login() {
   const navigate = useNavigate()
+
+  const { userAuth, setUserAuth } = useContext(AuthContext)
 
   const [loginInfo, setLoginInfo] = useState({
     email: '',
@@ -20,8 +20,8 @@ function Login(props) {
 
   const autoFillLogin = () => {
     setLoginInfo({
-      email: 'bambi0521@gmail.com',
-      password: '0521',
+      email: 'test3333@gmail.com',
+      password: '3333',
     })
   }
 
@@ -42,6 +42,13 @@ function Login(props) {
 
     // console.log(res.data)
     if (res.data.success) {
+      setUserAuth({
+        ...userAuth,
+        authorised: true,
+        member_sid: res.data.member_sid,
+        member_nickname: res.data.nickname,
+        token: res.data.token,
+      })
       alert('登入成功(๑¯◡¯๑)')
       navigate('/')
     } else {
@@ -55,7 +62,7 @@ function Login(props) {
         <form className="space-y-6" onSubmit={(e) => memberLogin(e)}>
           <h3
             className="text-xl font-medium text-gray-900 dark:text-white"
-            onDoubleClick={autoFillLogin}
+            onClick={autoFillLogin}
           >
             歡迎回來～～～
           </h3>

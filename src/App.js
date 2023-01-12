@@ -4,6 +4,7 @@ import MyContextsPorvider from './contexts/MyContextsProvider'
 // components
 import Navbar from './components/Navbar'
 import Home from './00-home/pages/Home'
+import MemberHome from './01-member/pages/MemberHome'
 import Login from './01-member/pages/Login'
 import Register from './01-member/pages/Register'
 import Footer from './components/Footer'
@@ -20,6 +21,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/member/">
+            <Route index path="" element={<MemberHome />} />
+          </Route>
         </Routes>
         <Footer />
       </MyContextsPorvider>

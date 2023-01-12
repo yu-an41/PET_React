@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import axios from 'axios'
 
+import AuthContext from '../../contexts/AuthContext'
+
 function Register() {
+  const navigate = useNavigate()
+
   const today = dayjs(new Date()).format('YYYY-MM-DD')
 
   const [registerInfo, setRegisterInfo] = useState({
@@ -25,19 +29,12 @@ function Register() {
 
   const toggleAgree = () => setAgreePolicy(!agreePolicy)
 
-  const autoRegister = {
-    email: 'test123@gmail.com',
-    password: '0228',
-    nickname: '阿極',
-    birthday: '',
-  }
-
   const autoFillRegister = () => {
     setRegisterInfo({
-      email: autoRegister.email,
-      password: autoRegister.password,
-      nickname: autoRegister.nickname,
-      birthday: autoRegister.birthday,
+      email: 'test123@gmail.com',
+      password: '0228',
+      nickname: '阿極',
+      birthday: '',
     })
   }
 
@@ -46,7 +43,7 @@ function Register() {
       ...registerInfo,
       [e.target.name]: e.target.value,
     })
-    console.log(e.target.value)
+    // console.log(e.target.value)
   }
 
   const memberRegister = async (e) => {
@@ -61,16 +58,22 @@ function Register() {
           registerInfo
         )
         console.log(res.data)
-        alert('註冊成功≖‿≖')
+        if (res.data.success) {
+          alert('註冊成功≖‿≖')
+          navigate('/')
+        } else {
+          alert('此帳號已經存在，請直接登入！')
+          navigate('/login')
+        }
       } else {
-        alert('Please enter valid email address')
+        alert('請輸入有效電子信箱')
       }
     } else {
-      alert('Please agree to Register Policy')
+      alert('請同意使用者政策！')
     }
   }
 
-  // regexp
+  // 信箱驗證 regexp
   // reference: https://ithelp.ithome.com.tw/articles/10094951
   const checkEmailValid = (email) => {
     const validEmail =
@@ -136,7 +139,7 @@ function Register() {
           </div>
           <div className="w-full relative">
             <label
-              htmlFor="password"
+              htmlFor="passwordConfirm"
               className="text-sm font-medium text-gray-900 mb-2 block"
             >
               確認密碼
@@ -151,8 +154,8 @@ function Register() {
             </label>
             <input
               className="bg-gray-50 border-gray-300 border text-sm rounded-lg w-full p-2.5"
-              name="password"
-              id="password"
+              name="passwordConfirm"
+              id="passwordConfirm"
               type={pwVisibility ? 'text' : 'password'}
               value={pwConfirm}
               onChange={(e) => {

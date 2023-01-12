@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+
+import AuthContext from '../contexts/AuthContext'
 
 function Navbar() {
   const navigate = useNavigate()
-  const [login, setLogin] = useState(false)
+  const { userAuth, setUserAuth, memberLogout } = useContext(AuthContext)
+
   const width = window.innerWidth
+
   const checkLogin = (e) => {
     e.preventDefault()
-    if (login) {
+    if (userAuth.authorised) {
       navigate('/member')
     } else {
       alert('請先登入！')
@@ -61,16 +65,16 @@ function Navbar() {
             </Link>
           </div>
           <div className="right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md">
-            {login ? (
+            {userAuth.authorised ? (
               <div className="flex items-center space-x-2 p-2">
                 <img
                   src="https://plchldr.co/i/40x40?bg=111111"
                   alt="plchldr.co"
                   className="h-9 w-9 rounded-full"
                 />
-                <div className="font-medium">斑比姊姊</div>
+                <div className="font-medium">{userAuth.member_nickname}</div>
                 <div>
-                  <Link to="/login">Logout</Link>
+                  <Link onClick={memberLogout}>Logout</Link>
                 </div>
               </div>
             ) : (
@@ -107,16 +111,16 @@ function Navbar() {
             </Link>
           </div>
           <div className="right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md">
-            {login ? (
+            {userAuth.authorised ? (
               <div className="flex items-center space-x-2 p-2">
                 <img
                   src="https://plchldr.co/i/40x40?bg=111111"
                   alt="plchldr.co"
                   className="h-9 w-9 rounded-full"
                 />
-                <div className="font-medium">斑比姊姊</div>
+                <div className="font-medium">{userAuth.member_nickname}</div>
                 <div>
-                  <Link to="/login">Logout</Link>
+                  <Link to="/logout">Logout</Link>
                 </div>
               </div>
             ) : (
