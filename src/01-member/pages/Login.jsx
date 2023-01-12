@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-function Login() {
+// import AuthContext from './../../contexts/AuthContext'
+
+function Login(props) {
+  // const { loginInfo, setLoginInfo } = useContext(AuthContext)
+
   const navigate = useNavigate()
+
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: '',
+  })
 
   const [pwVisibility, setPwVisiblity] = useState(false)
 
   const togglePwVisibility = () => setPwVisiblity(!pwVisibility)
 
-  const autoLogin = {
-    email: 'bambi0521@gmail.com',
-    password: '0521',
-  }
-  const [loginInfo, setLoginInfo] = useState({
-    email: '',
-    password: '',
-  })
   const autoFillLogin = () => {
     setLoginInfo({
-      email: autoLogin.email,
-      password: autoLogin.password,
+      email: 'bambi0521@gmail.com',
+      password: '0521',
     })
   }
 

@@ -5,17 +5,23 @@ import axios from 'axios'
 
 function Register() {
   const today = dayjs(new Date()).format('YYYY-MM-DD')
+
   const [registerInfo, setRegisterInfo] = useState({
     email: '',
     password: '',
     nickname: '',
     birthday: '',
   })
+
   const [pwVisibility, setPwVisiblity] = useState(false)
 
-  const togglePwVisibility = () => setPwVisiblity(!pwVisibility)
+  const [pwConfirm, setPwConfirm] = useState('')
+
+  const [pwAlert, setPwAlert] = useState(false)
 
   const [agreePolicy, setAgreePolicy] = useState(false)
+
+  const togglePwVisibility = () => setPwVisiblity(!pwVisibility)
 
   const toggleAgree = () => setAgreePolicy(!agreePolicy)
 
@@ -119,6 +125,46 @@ function Register() {
               placeholder="••••••••"
               value={registerInfo.password}
               onChange={updateRegisterInfo}
+              required={true}
+            />
+            <i
+              className={`absolute right-4 mt-3 text-gray-500 hover:text-blue-500 fa-regular ${
+                pwVisibility ? 'fa-eye-slash' : 'fa-eye'
+              }`}
+              onClick={togglePwVisibility}
+            ></i>
+          </div>
+          <div className="w-full relative">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-gray-900 mb-2 block"
+            >
+              確認密碼
+              <span className="mx-1 text-red-600 font-medium">*</span>
+              <small
+                className={`ml-2 text-sm text-red-700 ${
+                  pwConfirm ? '' : 'invisible'
+                }`}
+              >
+                請輸入相同密碼！
+              </small>
+            </label>
+            <input
+              className="bg-gray-50 border-gray-300 border text-sm rounded-lg w-full p-2.5"
+              name="password"
+              id="password"
+              type={pwVisibility ? 'text' : 'password'}
+              value={pwConfirm}
+              onChange={(e) => {
+                setPwConfirm(e.target.value)
+              }}
+              onBlur={(e) => {
+                if (registerInfo.password !== pwConfirm) {
+                  setPwAlert(true)
+                } else {
+                  setPwAlert(false)
+                }
+              }}
               required={true}
             />
             <i
