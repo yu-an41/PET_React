@@ -30,7 +30,9 @@ export const AuthContextProvider = ({ children }) => {
   // 登出
   const memberLogout = () => {
     setUserAuth(unAuth)
-    console.log('logout success')
+    localStorage.removeItem('auth')
+    alert('登出成功！')
+    navigate('/')
   }
   return (
     <AuthContext.Provider

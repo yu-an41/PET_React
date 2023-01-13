@@ -45,10 +45,11 @@ function Login() {
       setUserAuth({
         ...userAuth,
         authorised: true,
-        member_sid: res.data.member_sid,
-        member_nickname: res.data.nickname,
+        member_sid: res.data.sid,
+        nickname: res.data.nickname,
         token: res.data.token,
       })
+      localStorage.setItem('auth', JSON.stringify(res.data))
       alert('登入成功(๑¯◡¯๑)')
       navigate('/')
     } else {

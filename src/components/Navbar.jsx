@@ -40,7 +40,7 @@ function Navbar() {
             </Link>
             <Link
               to="/#"
-              className="font-medium transition hover:text-blue-600 "
+              className="font-medium transition hover:text-blue-600"
             >
               Forum
             </Link>
