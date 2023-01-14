@@ -33,7 +33,7 @@ function Navbar() {
           </div>
           <div className="w-48 sm:w-96 max-w-2xl flex items-center justify-around p-2">
             <Link
-              to="/#"
+              to="/products/"
               className="font-medium transition hover:text-blue-600"
             >
               Products
