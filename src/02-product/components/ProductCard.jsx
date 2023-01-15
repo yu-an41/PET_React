@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { imgNodeUrl } from '../../my-config'
@@ -15,8 +15,15 @@ function ProductCard({ prodData }) {
     inventory,
     specials,
   } = prodData
+
+  const [prodQty, setProdQty] = useState(0)
+
+  const addToCart = (prodSid, prodQty) => {
+    console.log(prodSid, prodQty)
+  }
+
   return (
-    <div className="max-w-2xl mx-auto px-1 py-1">
+    <div className="max-w-2xl mx-auto px-1 py-1 my-5">
       <div className="bg-white shadow-md rounded-lg max-w-sm">
         <Link to="/#">
           <img
@@ -82,21 +89,31 @@ function ProductCard({ prodData }) {
           <span className="text-3xl font-bold text-red-700 mr-5">
             {`$ ${member_price}`}
           </span>
-          <select>
+          <select
+            onChange={(e) => {
+              setProdQty(e.target.value)
+              console.log(`qty updated: ${e.target.value}`)
+            }}
+          >
             {Array(inventory).map((qty, i) => {
               return (
-                <option value={qty} alt={qty} key={qty}>
-                  {qty}
+                <option value={qty} alt={qty} key={i}>
+                  {i}
                 </option>
               )
             })}
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
           </select>
-          <Link
-            to="/#"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          <button
+            onClick={(e) => {
+              addToCart(sid, prodQty)
+            }}
+            className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
-            Add to cart
-          </Link>
+            <i className="fa-solid fa-cart-shopping"></i>
+          </button>
         </div>
       </div>
     </div>
