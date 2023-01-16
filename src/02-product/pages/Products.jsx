@@ -19,7 +19,7 @@ function Product() {
 
   return (
     <>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap items-stretch">
         {prodData.length &&
           prodData.map((p, i) => {
             return <ProductCard prodData={p} key={i} />

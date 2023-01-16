@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { imgNodeUrl } from '../../my-config'
@@ -22,8 +22,17 @@ function ProductCard({ prodData }) {
     console.log(prodSid, prodQty)
   }
 
+  const maxQty = Math.min(10, inventory)
+
+  //  學長補充數字填滿變陣列去map
+  // const getQtyArr = (qty) => {
+  //   Array(qty)
+  //     .fill(0)
+  //     .map((__, i) => i + 1)
+  // }
+
   return (
-    <div className="max-w-2xl mx-auto px-1 py-1 my-5">
+    <div className="max-w-2xl mx-auto px-1 py-1 w-1/2 md:w-1/3 xl:w-1/4 my-3 md:my-5">
       <div className="bg-white shadow-md rounded-lg max-w-sm">
         <Link to="/#">
           <img
@@ -39,7 +48,7 @@ function ProductCard({ prodData }) {
             </h3>
           </Link>
         </div>
-        <div className="flex items-center mx-5 mt-2.5 mb-5">
+        <div className="flex items-center mx-5 mt-2.5 mb-5 grow">
           <svg
             className="w-5 h-5 text-yellow-300"
             fill="currentColor"
@@ -85,8 +94,8 @@ function ProductCard({ prodData }) {
           </span>
         </div>
         <div className="flex items-center justify-between px-5 pb-5">
-          <span className="text-xl font-medium text-gray-600 line-through">{`$ ${price}`}</span>
-          <span className="text-3xl font-bold text-red-700 mr-5">
+          <span className="text-l md:text-xl font-medium text-gray-600 line-through">{`$ ${price}`}</span>
+          <span className="text-2xl md:text-3xl font-bold text-red-700 mr-3">
             {`$ ${member_price}`}
           </span>
           <select
@@ -95,16 +104,23 @@ function ProductCard({ prodData }) {
               console.log(`qty updated: ${e.target.value}`)
             }}
           >
-            {Array(inventory).map((qty, i) => {
+            {/* {Array(maxQty).map((qty, i) => {
               return (
-                <option value={qty} alt={qty} key={i}>
-                  {i}
+                <option value={qty} key={i + 1}>
+                  {i + 1}
                 </option>
               )
-            })}
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
+            })} */}
+            {Array(maxQty)
+              .fill(0)
+              .map((__, i) => i + 1)
+              .map((qty, i) => {
+                return (
+                  <option value={i + 1} key={i}>
+                    {i + 1}
+                  </option>
+                )
+              })}
           </select>
           <button
             onClick={(e) => {
