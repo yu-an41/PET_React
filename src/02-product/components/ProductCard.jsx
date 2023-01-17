@@ -20,7 +20,7 @@ function ProductCard({ prodData }) {
     specials,
   } = prodData
 
-  const [prodQty, setProdQty] = useState(0)
+  const [prodQty, setProdQty] = useState(1)
 
   const addToCart = (prodSid, prodQty) => {
     dispatch(
