@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MyContextsPorvider from './contexts/MyContextsProvider'
 
-// redux toolkit
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
-import cartSlice from './stores/cartSlice'
+// // redux toolkit
+// import { configureStore } from '@reduxjs/toolkit'
+// import { Provider } from 'react-redux'
+// import cartSlice from './stores/cartSlice'
 
 // components
 import Navbar from './components/Navbar'
@@ -25,36 +25,34 @@ import CartList from './03-cart/pages/CartList'
 // stylesheet
 import './App.scss'
 
-const store = configureStore({
-  reducer: {
-    cart: cartSlice,
-  },
-})
+// const store = configureStore({
+//   reducer: {
+//     cart: cartSlice,
+//   },
+// })
 
 function App() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <MyContextsPorvider>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/member/">
-              <Route index path="" element={<MemberHome />} />
-            </Route>
-            <Route path="/products/">
-              <Route index path="" element={<Products />} />
-            </Route>
-            <Route path="/cart/">
-              <Route index path="" element={<CartList />} />
-            </Route>
-          </Routes>
-          <Footer />
-        </MyContextsPorvider>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <MyContextsPorvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/member/">
+            <Route index path="" element={<MemberHome />} />
+          </Route>
+          <Route path="/products/">
+            <Route index path="" element={<Products />} />
+          </Route>
+          <Route path="/cart/">
+            <Route index path="" element={<CartList />} />
+          </Route>
+        </Routes>
+        <Footer />
+      </MyContextsPorvider>
+    </BrowserRouter>
   )
 }
 

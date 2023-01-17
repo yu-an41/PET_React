@@ -10,7 +10,7 @@ function Product() {
 
   const getProdData = async () => {
     const res = await axios.get(`${MY_HOST}/products/list/api`)
-    console.log(res.data)
+    // console.log(res.data)
     setProdData(res.data)
   }
   useEffect(() => {

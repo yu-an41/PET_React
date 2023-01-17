@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { addCart } from './../../stores/cartSlice'
 
 import { imgNodeUrl } from '../../my-config'
 
 function ProductCard({ prodData }) {
+  const dispatch = useDispatch()
+
   const {
     sid,
     name,
@@ -19,7 +23,10 @@ function ProductCard({ prodData }) {
   const [prodQty, setProdQty] = useState(0)
 
   const addToCart = (prodSid, prodQty) => {
-    console.log(prodSid, prodQty)
+    dispatch(
+      addCart({ prodSid, name, img, price, member_price, inventory, prodQty })
+    )
+    // console.log(prodSid, prodQty)
   }
 
   const maxQty = Math.min(10, inventory)
