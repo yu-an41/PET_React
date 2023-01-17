@@ -38,12 +38,12 @@ function Navbar() {
             >
               Products
             </Link>
-            <Link
+            {/* <Link
               to="/#"
               className="font-medium transition hover:text-blue-600"
             >
               Forum
-            </Link>
+            </Link> */}
             <Link
               to="/#"
               className="font-medium transition hover:text-blue-600 "
@@ -64,6 +64,12 @@ function Navbar() {
               Member
             </Link>
           </div>
+          <Link
+            to="/cart/"
+            className="right-2 flex jusity-center items-center h-full"
+          >
+            <i className="fa-solid fa-cart-shopping text-blue-500 hover:text-gray-700"></i>
+          </Link>
           <div className="right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md">
             {userAuth.authorised ? (
               <div className="flex items-center space-x-2 p-2">

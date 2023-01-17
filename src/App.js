@@ -19,6 +19,9 @@ import Register from './01-member/pages/Register'
 // products
 import Products from './02-product/pages/Products'
 
+// cart
+import CartList from './03-cart/pages/CartList'
+
 // stylesheet
 import './App.scss'
 
@@ -43,6 +46,9 @@ function App() {
             </Route>
             <Route path="/products/">
               <Route index path="" element={<Products />} />
+            </Route>
+            <Route path="/cart/">
+              <Route index path="" element={<CartList />} />
             </Route>
           </Routes>
           <Footer />
