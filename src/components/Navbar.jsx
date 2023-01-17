@@ -1,9 +1,21 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { addCart } from '../stores/cartSlice'
 
 import AuthContext from '../contexts/AuthContext'
 
 function Navbar() {
+  // const cartItems = useSelector((state) => {
+  //   console.log(state.cart.cartItems)
+  //   return state
+  // })
+  // const totalItems = cartItems.reduce((acc, cur) => {
+  //   console.log(totalItems)
+  //   return
+  // }, 0)
+
   const navigate = useNavigate()
   const { userAuth, setUserAuth, memberLogout } = useContext(AuthContext)
 
@@ -68,7 +80,8 @@ function Navbar() {
             to="/cart/"
             className="right-2 flex jusity-center items-center h-full"
           >
-            <i className="fa-solid fa-cart-shopping text-blue-500 hover:text-gray-700"></i>
+            <i className="text-2xl fa-solid fa-cart-shopping text-blue-400 hover:text-gray-700"></i>
+            <div className="rounded-full bg:red-500"></div>
           </Link>
           <div className="right-2 mt-1 w-48 divide-y divide-gray-200 rounded-md">
             {userAuth.authorised ? (

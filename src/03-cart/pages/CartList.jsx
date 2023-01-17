@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { addCart } from '../../stores/cartSlice'
+
 import CartItem from '../components/CartItem'
 
 function CartList() {
+  const [cartList, setCartList] = useState()
+
+  const getCartList = useSelector((state) => {
+    setCartList(state.cart.CartItems)
+    console.log(state.cart.CartItemss);
+  })
+
+  useEffect(() => {
+    getCartList()
+  }, [])
   return (
     <div className="border">
       <div className="bg-gray-100 px-6 py-5 mb-2 flex justify-between">

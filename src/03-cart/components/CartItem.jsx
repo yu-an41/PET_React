@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { addCart } from '../../stores/cartSlice'
 
 import { imgNodeUrl } from '../../my-config'
 
 function CartItem() {
+  const [newQty, setNewQty] = useState(1)
+
   return (
     <div className="border-t-2 pt-12 border-orange-400 py-5 px-24 bg-white">
       <div className="w-full mb-5 md:w-1/2 lg:w-1/3 border border-gray-400 aspect-video md:aspect-square">
@@ -30,7 +35,13 @@ function CartItem() {
               <i class="fa-solid fa-minus p-2"></i>
             </div>
             <div className="mx-auto w-1/4 p-1">
-              <input type="text" value={1} max={10} />
+              <input
+                className="focus:border-none"
+                type="text"
+                value={1}
+                max={10}
+                onChange={(e) => setNewQty(+e.target.value)}
+              />
             </div>
             <div className="w-1/4 rounded-full  bg-gray-300 text-gray-700 hover:text-white hover:bg-gray-600">
               <i class="fa-solid fa-plus p-2"></i>

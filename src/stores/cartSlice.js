@@ -2,10 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 let initState = {
   cartItems: [],
-  totalItems: 0,
-  totalQty: 0,
-  totalPrice: 0,
-  totalMember_Price: 0,
 }
 
 if (localStorage.getItem('cart')?.totalItems) {
@@ -27,49 +23,41 @@ const cartSlice = createSlice({
       const { cartItems, totalItems, totalQty, totalPrice, totalMember_Price } =
         state
 
-      let newCart = {}
-
       if (index === -1) {
-        newCart = {
-          ...state,
-          cartItems: [
-            ...cartItems,
-            {
-              prodSid,
-              name,
-              img,
-              price,
-              member_price,
-              inventory,
-              prodQty: prodQty,
-            },
-          ],
-          totalItems: totalItems + 1,
-          totalQty: totalQty + prodQty,
-          totalPrice: totalPrice + price * prodQty,
-          totalMember_Price: totalMember_Price + member_price * prodQty,
-        }
+        cartItems.push({
+          prodSid,
+          name,
+          img,
+          price,
+          member_price,
+          inventory,
+          prodQty,
+        })
 
-        alert('商品成功加入購物車！')
+        console.log('商品成功加入購物車！')
       } else {
         const item = cartItems[index]
+        console.log(name, prodQty)
         cartItems[index] = {
           ...cartItems[index],
           prodQty: cartItems[index].prodQty + prodQty,
         }
 
-        newCart = {
-          ...state,
-          cartItems: cartItems,
-          totalQty: totalQty + prodQty,
-          totalPrice: totalPrice + price * prodQty,
-          totalMember_Price: totalMember_Price + member_price * prodQty,
-        }
-        alert('已更新商品數量！')
+        console.log('已更新商品數量！')
       }
-      console.log(newCart)
-      localStorage.setItem('cart', JSON.stringify(newCart))
-      return { ...state }
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+    },
+    updateQty(state = initState, action) {
+      const { prodSid, prodQty } = action.payload
+
+      const index = state.cartItems.findIndex((e) => {
+        return e.sid === prodSid
+      })
+
+      state.cartItems[index] = {
+        ...state.cartItems[index],
+        prodQty: prodQty,
+      }
     },
   },
 })
