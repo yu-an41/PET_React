@@ -107,7 +107,7 @@ function ProductCard({ prodData }) {
           </span>
           <select
             onChange={(e) => {
-              setProdQty(e.target.value)
+              setProdQty(+e.target.value)
               console.log(`qty updated: ${e.target.value}`)
             }}
           >
@@ -123,7 +123,11 @@ function ProductCard({ prodData }) {
               .map((__, i) => i + 1)
               .map((qty, i) => {
                 return (
-                  <option value={i + 1} key={i}>
+                  <option
+                    value={i + 1}
+                    key={i}
+                    selection={i + 1 === 1 ? 'selected' : ''}
+                  >
                     {i + 1}
                   </option>
                 )
