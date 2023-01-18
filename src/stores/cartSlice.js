@@ -50,9 +50,7 @@ const cartSlice = createSlice({
     updateQty(state = initState, action) {
       const { prodSid, prodQty } = action.payload
 
-      const index = state.cartItems.findIndex((e) => {
-        return e.sid === prodSid
-      })
+      const index = state.cartItems.findIndex((e) => e.sid === prodSid)
 
       state.cartItems[index] = {
         ...state.cartItems[index],
