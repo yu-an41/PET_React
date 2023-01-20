@@ -11,7 +11,7 @@ if (localStorage.getItem('cart')?.totalItems) {
 const cartSlice = createSlice({
   name: 'cart',
   initialState: initState,
-  reducers: {
+  reducers: { 
     addCart(state = initState, action) {
       const { prodSid, name, img, price, member_price, inventory, prodQty } =
         action.payload
