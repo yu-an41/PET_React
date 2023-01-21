@@ -11,11 +11,11 @@ if (localStorage.getItem('cart')?.totalItems) {
 const cartSlice = createSlice({
   name: 'cart',
   initialState: initState,
-  reducers: { 
+  reducers: {
     addCart(state = initState, action) {
       const { prodSid, name, img, price, member_price, inventory, prodQty } =
         action.payload
-      console.log(prodSid, name, img, price, member_price, inventory, prodQty)
+      // console.log(prodSid, name, img, price, member_price, inventory, prodQty)
 
       const index = state.cartItems.findIndex((e) => {
         return e.sid === prodSid
@@ -36,12 +36,9 @@ const cartSlice = createSlice({
 
         console.log('商品成功加入購物車！')
       } else {
-        const item = cartItems[index]
+        // const item = cartItems[index]
         console.log(name, prodQty)
-        cartItems[index] = {
-          ...cartItems[index],
-          prodQty: cartItems[index].prodQty + prodQty,
-        }
+        cartItems[index].prodQty += prodQty
 
         console.log('已更新商品數量！')
       }
@@ -49,16 +46,29 @@ const cartSlice = createSlice({
     },
     updateQty(state = initState, action) {
       const { prodSid, prodQty } = action.payload
+      const { cartItems } = state.cartItems
 
       const index = state.cartItems.findIndex((e) => e.sid === prodSid)
 
-      state.cartItems[index] = {
-        ...state.cartItems[index],
+      cartItems[index] = {
+        ...cartItems[index],
         prodQty: prodQty,
       }
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+    },
+    deleteItem(state = initState, action) {
+      const { prodSid } = action.payload
+
+      const { cartItems } = state.cartItems
+
+      cartItems.findIndex((e) => {
+        return e.sid !== prodSid
+      })
+
+      localStorage.setItem('cart', JSON.stringify(cartItems))
     },
   },
 })
-  
+
 export const { addCart } = cartSlice.actions
 export default cartSlice.reducer
