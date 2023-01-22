@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { json } from 'react-router-dom'
 
 let initState = {
   cartItems: [],
@@ -50,10 +51,15 @@ const cartSlice = createSlice({
 
       const index = state.cartItems.findIndex((e) => e.sid === prodSid)
 
-      cartItems[index] = {
-        ...cartItems[index],
-        prodQty: prodQty,
+      if (cartItems[index].prodQty + prodQty <= cartItems[index].inventory) {
+        cartItems[index].prodQty += prodQty
+      } else {
+        alert(
+          `已達本商品最高購買量：${cartItems[index].inventory}，請重新選擇（已選購：${cartItems[index].prodQtyㄋ}）`
+        )
       }
+      cartItems[index].prodQty = prodQty
+
       localStorage.setItem('cart', JSON.stringify(cartItems))
     },
     deleteItem(state = initState, action) {
@@ -61,9 +67,40 @@ const cartSlice = createSlice({
 
       const { cartItems } = state.cartItems
 
-      cartItems.findIndex((e) => {
+      cartItems.filter((e) => {
         return e.sid !== prodSid
       })
+
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+    },
+    minusQty(state = initState, action) {
+      const { prodSid, prodQty } = action.payload
+
+      const { cartItems } = state.cartItems
+
+      const index = cartItems.findIndex((e) => {
+        return e.sid === prodSid
+      })
+
+      if (cartItems[index].prodQty) {
+        cartItems[index].prodQty -= 1
+      } else {
+        alert('本商品最低購買數量為1！')
+      }
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+    },
+    plusQty(state = initState, action) {
+      const { prodSid, prodQty } = action.payload
+
+      const { cartItems } = state.cartItems
+
+      const index = cartItems.findIndex((e) => (e.sid = prodSid))
+
+      if (cartItems[index].prodQty < cartItems[index].inventory) {
+        cartItems[index].prodQty += 1
+      } else {
+        alert('已達本商品最高購買數量！')
+      }
 
       localStorage.setItem('cart', JSON.stringify(cartItems))
     },

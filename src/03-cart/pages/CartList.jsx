@@ -8,13 +8,13 @@ import CartItem from '../components/CartItem'
 function CartList() {
   const [cartList, setCartList] = useState()
 
-  const getCartList = useSelector((state) => {
-    setCartList(state.cart.CartItems)
-    console.log(state.cart.CartItemss);
-  })
+  // const getCartList = useSelector((state) => {
+  //   setCartList(state.cart.CartItems)
+  //   console.log(state.cart.CartItemss)
+  // })
 
   useEffect(() => {
-    getCartList()
+    // getCartList()
   }, [])
   return (
     <div className="border">
