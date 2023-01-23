@@ -1,12 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
+import AuthContext, { userAuth } from './../../contexts/AuthContext'
 import { addCart } from '../../stores/cartSlice'
 
 import CartItem from '../components/CartItem'
 
 function CartList() {
   const [cartList, setCartList] = useState()
+
+  const { userAuth } = useContext(AuthContext)
+
+  // 抓 store 裡面的 cartItems
+  const state = useSelector((state) => state.cart)
+
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalMemberPrice, setTotalMemberPrice] = useState(0)
+
+  // 結帳流程狀態
+  //  const [nowState, setNowState] = useStae(0)
+
+  // 付款方式狀態（待移到確認頁面）
+  // const [payWay, setPayWay] = useState(1)
 
   // const getCartList = useSelector((state) => {
   //   setCartList(state.cart.CartItems)
@@ -15,6 +31,12 @@ function CartList() {
 
   useEffect(() => {
     // getCartList()
+    let totalPrice = state.cart.reduce((acc, cur) => {
+      return acc + cur.price * cur.amount
+    }, 0)
+    let totalMemberPrice = state.cart.reduce((acc, cur) => {
+      return acc + cur.member_price * cur.amount
+    }, 0)
   }, [])
   return (
     <div className="border">
@@ -30,7 +52,7 @@ function CartList() {
             {Array(5)
               .fill(1)
               .map((c, i) => {
-                return <CartItem />
+                return <CartItem key={i}/>
               })}
           </div>
         </div>

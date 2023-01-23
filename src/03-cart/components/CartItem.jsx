@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { addCart } from '../../stores/cartSlice'
+import { useNavigate } from 'react-router-dom'
+
+// import { addCart } from '../../stores/cartSlice'
 
 import { imgNodeUrl } from '../../my-config'
 
@@ -28,11 +30,11 @@ function CartItem() {
         </div>
         <div className="details-right relative w-1/2 flex flex-col">
           <div className="absolute right-3">
-            <i class="text-2xl fa-solid fa-xmark text-gray-600 hover:text-blue-500"></i>
+            <i className="text-2xl fa-solid fa-xmark text-gray-600 hover:text-blue-500"></i>
           </div>
           <div className="w-1/2 flex justify-center mt-12 ml-auto mr-5">
             <div className="w-1/4 rounded-full bg-gray-300 text-gray-700 hover:text-white hover:bg-gray-600">
-              <i class="fa-solid fa-minus p-2"></i>
+              <i className="fa-solid fa-minus p-2"></i>
             </div>
             <div className="mx-auto w-1/4 p-1">
               <input
@@ -44,7 +46,7 @@ function CartItem() {
               />
             </div>
             <div className="w-1/4 rounded-full  bg-gray-300 text-gray-700 hover:text-white hover:bg-gray-600">
-              <i class="fa-solid fa-plus p-2"></i>
+              <i className="fa-solid fa-plus p-2"></i>
             </div>
           </div>
         </div>
