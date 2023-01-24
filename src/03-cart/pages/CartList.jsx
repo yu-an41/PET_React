@@ -14,6 +14,7 @@ function CartList() {
 
   // 抓 store 裡面的 cartItems
   const state = useSelector((state) => state.cart)
+  // console.log('1', state.cartItems)
 
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalMemberPrice, setTotalMemberPrice] = useState(0)
@@ -25,18 +26,19 @@ function CartList() {
   // const [payWay, setPayWay] = useState(1)
 
   // const getCartList = useSelector((state) => {
-  //   setCartList(state.cart.CartItems)
-  //   console.log(state.cart.CartItemss)
+  //   setCartList(state.cartItems)
+  //   console.log(state.cartItems)
   // })
 
   useEffect(() => {
     // getCartList()
-    let totalPrice = state.cart.reduce((acc, cur) => {
+    let totalPrice = state.cartItems.reduce((acc, cur) => {
       return acc + cur.price * cur.amount
     }, 0)
-    let totalMemberPrice = state.cart.reduce((acc, cur) => {
+    let totalMemberPrice = state.cartItems.reduce((acc, cur) => {
       return acc + cur.member_price * cur.amount
     }, 0)
+    // console.log('2', state.cartItems)
   }, [])
   return (
     <div className="border">
@@ -52,7 +54,7 @@ function CartList() {
             {Array(5)
               .fill(1)
               .map((c, i) => {
-                return <CartItem key={i}/>
+                return <CartItem key={i} />
               })}
           </div>
         </div>
