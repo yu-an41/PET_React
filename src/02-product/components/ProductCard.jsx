@@ -24,7 +24,17 @@ function ProductCard({ prodData }) {
 
   const addToCart = (prodSid, prodQty) => {
     dispatch(
-      addCart({ prodSid, name, img, price, member_price, inventory, prodQty })
+      addCart({
+        prodSid,
+        category,
+        name,
+        img,
+        price,
+        member_price,
+        inventory,
+        prodQty,
+        specials,
+      })
     )
     // console.log(prodSid, prodQty)
   }
@@ -111,13 +121,6 @@ function ProductCard({ prodData }) {
               // console.log(`qty updated: ${e.target.value}`)
             }}
           >
-            {/* {Array(maxQty).map((qty, i) => {
-              return (
-                <option value={qty} key={i + 1}>
-                  {i + 1}
-                </option>
-              )
-            })} */}
             {Array(maxQty)
               .fill(0)
               .map((__, i) => i + 1)

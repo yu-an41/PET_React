@@ -5,8 +5,9 @@ let initState = {
   cartItems: [],
 }
 
-if (localStorage.getItem('cart')?.totalItems) {
-  initState = JSON.parse(localStorage.getItem('cart'))
+if (localStorage.getItem('cart')) {
+  // console.log('加過購物車ㄌ')
+  initState.cartItems = JSON.parse(localStorage.getItem('cart'))
 }
 
 const cartSlice = createSlice({
@@ -14,8 +15,17 @@ const cartSlice = createSlice({
   initialState: initState,
   reducers: {
     addCart(state = initState, action) {
-      const { prodSid, name, img, price, member_price, inventory, prodQty } =
-        action.payload
+      const {
+        prodSid,
+        category,
+        name,
+        img,
+        price,
+        member_price,
+        inventory,
+        prodQty,
+        specials,
+      } = action.payload
 
       const index = state.cartItems.findIndex((e) => {
         return e.prodSid === prodSid
@@ -25,12 +35,14 @@ const cartSlice = createSlice({
       if (index === -1) {
         cartItems.push({
           prodSid,
+          category,
           name,
           img,
           price,
           member_price,
           inventory,
           prodQty,
+          specials,
         })
 
         console.log('商品成功加入購物車！')
@@ -45,19 +57,19 @@ const cartSlice = createSlice({
       // console.log(cartItems)
     },
     updateQty(state = initState, action) {
-      const { prodSid, prodQty } = action.payload
+      const { prodSid, newQty } = action.payload
       const { cartItems } = state.cartItems
 
       const index = state.cartItems.findIndex((e) => e.sid === prodSid)
 
-      if (cartItems[index].prodQty + prodQty <= cartItems[index].inventory) {
-        cartItems[index].prodQty += prodQty
+      if (cartItems[index].prodQty + newQty <= cartItems[index].inventory) {
+        cartItems[index].prodQty += newQty
       } else {
         alert(
-          `已達本商品最高購買量：${cartItems[index].inventory}，請重新選擇（已選購：${cartItems[index].prodQtyㄋ}）`
+          `已達本商品最高購買量：${cartItems[index].inventory}，請重新選擇（已選購：${cartItems[index].prodQty}）`
         )
       }
-      cartItems[index].prodQty = prodQty
+      cartItems[index].prodQty = newQty
 
       localStorage.setItem('cart', JSON.stringify(cartItems))
     },
@@ -102,6 +114,9 @@ const cartSlice = createSlice({
       }
 
       localStorage.setItem('cart', JSON.stringify(cartItems))
+    },
+    emptyCart(state = initState, action) {
+      console.log('cart emptied')
     },
   },
 })
