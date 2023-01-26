@@ -16,13 +16,11 @@ const cartSlice = createSlice({
     addCart(state = initState, action) {
       const { prodSid, name, img, price, member_price, inventory, prodQty } =
         action.payload
-      // console.log(prodSid, name, img, price, member_price, inventory, prodQty)
 
       const index = state.cartItems.findIndex((e) => {
-        return e.sid === prodSid
+        return e.prodSid === prodSid
       })
-      const { cartItems, totalItems, totalQty, totalPrice, totalMember_Price } =
-        state
+      const { cartItems } = state
 
       if (index === -1) {
         cartItems.push({
@@ -44,6 +42,7 @@ const cartSlice = createSlice({
         console.log('已更新商品數量！')
       }
       localStorage.setItem('cart', JSON.stringify(cartItems))
+      // console.log(cartItems)
     },
     updateQty(state = initState, action) {
       const { prodSid, prodQty } = action.payload
@@ -106,6 +105,6 @@ const cartSlice = createSlice({
     },
   },
 })
- 
+
 export const { addCart } = cartSlice.actions
 export default cartSlice.reducer

@@ -38,7 +38,12 @@ function CartList() {
     let totalMemberPrice = state.cartItems.reduce((acc, cur) => {
       return acc + cur.member_price * cur.amount
     }, 0)
-    // console.log('2', state.cartItems)
+    console.log(
+      'totalPrice: ',
+      totalPrice,
+      ' totalMemberPrice: ',
+      totalMemberPrice
+    )
   }, [])
   return (
     <div className="border">

@@ -12,7 +12,7 @@ function CartItem() {
 
   return (
     <div className="border-t-2 pt-12 border-orange-400 py-5 px-24 bg-white">
-      <div className="w-full mb-5 md:w-1/2 lg:w-1/3 border border-gray-400 aspect-video md:aspect-square">
+      <div className="w-full mb-5 lg:w-1/2 border border-gray-400 aspect-video md:aspect-square">
         <img
           className="object-cover"
           src={`${imgNodeUrl}/images/products/dog2-toy2.png`}

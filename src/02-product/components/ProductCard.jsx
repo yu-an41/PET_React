@@ -108,7 +108,7 @@ function ProductCard({ prodData }) {
           <select
             onChange={(e) => {
               setProdQty(+e.target.value)
-              console.log(`qty updated: ${e.target.value}`)
+              // console.log(`qty updated: ${e.target.value}`)
             }}
           >
             {/* {Array(maxQty).map((qty, i) => {
