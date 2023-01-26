@@ -1,17 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import Slider from 'react-slick'
 
 import { imgNodeUrl } from '../../my-config'
 
 export default function HomeSlider() {
-  const settings = {
+  const [autoplay, setAutoplay] = useState(true)
+  const [sliderSettings, setSliderSettings] = useState({
     // dots: true,
     infinite: true,
-    autoplay: true,
+    autoplay: autoplay,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    pauseOnHover: true,
+    // pauseOnHover: true,
     // responsive: [
     //   {
     //     breakpoint: 1024,
@@ -38,10 +39,11 @@ export default function HomeSlider() {
     //     },
     //   },
     // ],
-  }
+  })
+
   return (
     <div className="my-5 p-5 bg-white w-full border shadow-md rounded-lg">
-      <Slider {...settings}>
+      <Slider {...sliderSettings}>
         <div className="h-full flex justify-center items-center">
           <img
             className="object-cover w-full"
@@ -64,6 +66,25 @@ export default function HomeSlider() {
           />
         </div>
       </Slider>
+      <div className="w-36 md:w-48 mx-auto py-5">
+        <ul className="flex justify-between items-center">
+          <li className="text-xl font-medium text-blue-400 hover:text-blue-600">
+            <i className="fa-solid fa-backward"></i>
+          </li>
+          {autoplay ? (
+            <li className="text-2xl font-medium text-blue-400 hover:text-blue-600">
+              <i className="fa-solid fa-pause"></i>
+            </li>
+          ) : (
+            <li className="text-xl font-medium text-blue-400 hover:text-blue-600">
+              <i className="fa-solid fa-play"></i>
+            </li>
+          )}
+          <li className="text-xl font-medium text-blue-400 hover:text-blue-600">
+            <i className="fa-solid fa-forward"></i>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }
