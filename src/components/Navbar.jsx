@@ -33,7 +33,7 @@ function Navbar() {
   return (
     <>
       {width > 390 ? (
-        <header className="fixed flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2 mb-3">
+        <header className="fixed flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2 mb-3 z-10">
           <div className="flex items-center space-x-2 ml-2">
             <div>
               <Link to="/">

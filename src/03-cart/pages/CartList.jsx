@@ -10,7 +10,7 @@ import { emptyCart } from '../../stores/cartSlice'
 import CartItem from '../components/CartItem'
 
 function CartList() {
-  const [cartList, setCartList] = useState()
+  const [cartDetails, setCartDetails] = useState()
 
   const { userAuth } = useContext(AuthContext)
 
@@ -29,20 +29,18 @@ function CartList() {
   // const [payWay, setPayWay] = useState(1)
 
   useEffect(() => {
-    // getCartList()
-    let totalPrice = state.cartItems.reduce((acc, cur) => {
-      return acc + cur.price * cur.amount
-    }, 0)
-    let totalMemberPrice = state.cartItems.reduce((acc, cur) => {
-      return acc + cur.member_price * cur.amount
-    }, 0)
-    console.log(
-      'totalPrice: ',
-      totalPrice,
-      ' totalMemberPrice: ',
-      totalMemberPrice
+    setCartDetails(state.cartItems)
+    setTotalPrice(
+      state.cartItems.reduce((acc, cur) => {
+        return acc + cur.price * cur.prodQty
+      }, 0)
     )
-  }, [])
+    setTotalMemberPrice(
+      state.cartItems.reduce((acc, cur) => {
+        return acc + cur.member_price * cur.prodQty
+      }, 0)
+    )
+  }, [state.cartItems])
   return (
     <div className="border mb-20 pt-20">
       <div className="bg-gray-100 px-6 py-3 mb-2 flex justify-between">
@@ -59,7 +57,29 @@ function CartList() {
             ))}
           </div>
         </div>
-        <div className="hidden lg:block lg:w-1/2 border bg-gray-400"></div>
+        <div className="lg:w-1/2 border bg-gray-400 px-20 py-12">
+          <div className="text-2xl font-medium">Total</div>
+          <div className="">
+            <div className="flex justify-between px-12">
+              <div>原價</div>
+              <div>$ {totalPrice}</div>
+            </div>
+            <div className="flex justify-between px-12">
+              <div>優惠價</div>
+              <div>$ {totalMemberPrice}</div>
+            </div>
+            <div className="flex justify-between px-12">
+              <div>共計</div>
+              <div>
+                {state.cartItems.reduce((acc, cur) => {
+                  return acc + cur.prodQty
+                }, 0)}
+                項商品
+              </div>
+            </div>
+            <li>折價券 </li>
+          </div>
+        </div>
       </div>
       <div className=""></div>
     </div>
