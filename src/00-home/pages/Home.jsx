@@ -4,14 +4,16 @@ import { imgNodeUrl } from '../../my-config'
 
 import TeamMemberCard from '../components/TeamMemberCard'
 import HomeCarousel from '../components/HomeCarousel'
+import HomeSlider from '../components/HomeSlider'
 
 function Home() {
   return (
     <div>
-      <section className="px-16">
-        <HomeCarousel />
+      <section className="px-16 mb-8">
+        {/* <HomeCarousel /> */}
+        <HomeSlider />
       </section>
-      <div>Home</div>
+      {/* <div>Home</div> */}
       <section>
         <header className="text-center mx-auto mb-12">
           <h3 className="text-2xl leading-normal mb-2 font-bold text-gray-800 ">
