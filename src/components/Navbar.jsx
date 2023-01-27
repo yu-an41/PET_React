@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -7,16 +7,11 @@ import { addCart } from '../stores/cartSlice'
 import AuthContext from '../contexts/AuthContext'
 
 function Navbar() {
-  // const cartItems = useSelector((state) => {
-  //   console.log(state.cart.cartItems)
-  //   return state
-  // })
-  // const totalItems = cartItems.reduce((acc, cur) => {
-  //   console.log(totalItems)
-  //   return
-  // }, 0)
-
   const navigate = useNavigate()
+
+  const state = useSelector((state) => state.cart)
+  const [cartDetails, setCartDetails] = useState()
+
   const { userAuth, setUserAuth, memberLogout } = useContext(AuthContext)
 
   const width = window.innerWidth
@@ -30,6 +25,10 @@ function Navbar() {
       navigate('/login')
     }
   }
+
+  useEffect(() => {
+    setCartDetails(state.cartItems)
+  }, [state.cartItems])
   return (
     <>
       {width > 390 ? (
@@ -38,7 +37,10 @@ function Navbar() {
             <div>
               <Link to="/">
                 <div className="w-24">
-                  <img src="https://dotown.maeda-design-room.net/wp-content/uploads/2022/10/thing_dachshund_02.png" />
+                  <img
+                    src="https://dotown.maeda-design-room.net/wp-content/uploads/2022/10/thing_dachshund_02.png"
+                    alt=""
+                  />
                 </div>
               </Link>
             </div>
@@ -77,7 +79,14 @@ function Navbar() {
             </Link>
           </div>
           <Link
-            to="/cart/"
+            onClick={(e) => {
+              e.preventDefault()
+              if (state.cartItems.length) {
+                navigate('/cart/')
+              } else {
+                alert('YOUR CART IS EMPTY!')
+              }
+            }}
             className="right-2 flex jusity-center items-center h-full"
           >
             <i className="text-2xl fa-solid fa-cart-shopping text-blue-400 hover:text-gray-700"></i>

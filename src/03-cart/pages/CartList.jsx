@@ -10,6 +10,9 @@ import { emptyCart } from '../../stores/cartSlice'
 import CartItem from '../components/CartItem'
 
 function CartList() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [cartDetails, setCartDetails] = useState()
 
   const { userAuth } = useContext(AuthContext)
@@ -45,14 +48,20 @@ function CartList() {
     <div className="border mb-20 pt-20">
       <div className="bg-gray-100 px-6 py-3 mb-2 flex justify-between">
         <h2 className="text-2xl font-bold text-blue-500">My Cart</h2>
-        <button className="border border-red-700 rounded px-5 py-1 hover:bg-red-700 hover:text-white">
+        <button
+          className="border border-red-700 rounded px-5 py-1 hover:bg-red-700 hover:text-white"
+          onClick={() => {
+            dispatch(emptyCart())
+            navigate('/')
+          }}
+        >
           清空
         </button>
       </div>
       <div className="lg:flex flex-wrap">
         <div className="lg:w-1/2 border bg-red-100">
           <div className="border-b-2 bg-gray-200 px-6 py-12">
-            {cartItems?.map((v, i) => (
+            {cartDetails?.map((v, i) => (
               <CartItem key={i} cartDetails={v} />
             ))}
           </div>

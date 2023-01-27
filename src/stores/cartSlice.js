@@ -75,14 +75,16 @@ const cartSlice = createSlice({
     },
     deleteItem(state = initState, action) {
       const { prodSid } = action.payload
+      // console.log(prodSid)
 
-      state.cartItems.filter((e) => {
-        return e.prodSid !== prodSid
+      // const index = state.cartItems.findIndex((e) => e.prodSid === prodSid)
+
+      state.cartItems = state.cartItems.filter((item) => {
+        return item.prodSid !== prodSid
       })
-
       const { cartItems } = state.cartItems
 
-      localStorage.setItem('cart', JSON.stringify(cartItems))
+      // localStorage.setItem('cart', JSON.stringify(cartItems))
     },
     minusQty(state = initState, action) {
       const { prodSid } = action.payload
@@ -116,8 +118,7 @@ const cartSlice = createSlice({
       localStorage.setItem('cart', JSON.stringify(cartItems))
     },
     emptyCart(state = initState, action) {
-      const { cartItems } = state.cartItems
-      cartItems = []
+      state.cartItems = []
       if (localStorage.getItem('cart')) {
         localStorage.removeItem('cart')
       }
