@@ -28,8 +28,9 @@ function CartList() {
   // 結帳流程狀態
   //  const [nowState, setNowState] = useState(0)
 
-  // 付款方式狀態（待移到確認頁面）
-  // const [payWay, setPayWay] = useState(1)
+  const checkLogin = () => {
+    
+  }
 
   useEffect(() => {
     setCartDetails(state.cartItems)
@@ -90,7 +91,10 @@ function CartList() {
           </div>
         </div>
       </div>
-      <div className=""></div>
+      <div className="">
+        <button className="">繼續逛逛</button>
+        <button className="">前往結賬</button>
+      </div>
     </div>
   )
 }
