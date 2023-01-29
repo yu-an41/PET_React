@@ -12,7 +12,7 @@ function CartDetails() {
 
   // 會員登入狀態
   const { userAuth } = useContext(AuthContext)
-
+  console.log(userAuth)
   // 抓購物車資料
   const state = useSelector((state) => state.cart)
   const cartItems = state.cartItems
@@ -21,7 +21,7 @@ function CartDetails() {
   const [totalMemberPrice, setTotalMemberPrice] = useState(0)
 
   // 付款方式
-  const [payWay, setPayWay] = useState(1)
+  const [payWay, setPayWay] = useState(2)
 
   // 訂購資訊共用樣式
   const liClassName = ''
@@ -31,19 +31,24 @@ function CartDetails() {
       if (cartItems.length > 0) {
         const order = cartItems.map((item) => {
           return {
-            id: item.id,
-            quantity: item.quantity,
+            id: item.prodSid,
+            quantity: item.prodQty,
           }
         })
-        const res = await axios.post(`http:localhost:3005/cart/createOrder`, {
-          order,
-          member_sid: userAuth.member_sid,
-          payWay,
-        })
-        if (res.data.success) {
-          console.log(res.data.message)
+        console.log(userAuth.member_sid)
+        const { data } = await axios.post(
+          `http://localhost:3005/cart/createOrder`,
+          {
+            order,
+            member_sid: userAuth.member_sid,
+            payWay,
+          }
+        )
+        if (data.output.success) {
+          const url = data.output.url
+          window.open(url, '_self')
         } else {
-          console.log(res.data.message)
+          alert('付款失敗')
         }
       }
     } else {

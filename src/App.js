@@ -22,6 +22,7 @@ import Products from './02-product/pages/Products'
 // cart
 import CartList from './03-cart/pages/CartList'
 import CartDetails from './03-cart/pages/CartDetails'
+import LinePayConfirm from './03-cart/pages/LinePayConfirm'
 
 // stylesheet
 import './App.scss'
@@ -32,6 +33,7 @@ function App() {
       <MyContextsPorvider>
         <Navbar />
         <Routes>
+          <Route path="/linepay/confirm" element={<LinePayConfirm />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -45,7 +45,7 @@ function Login() {
       setUserAuth({
         ...userAuth,
         authorised: true,
-        member_sid: res.data.sid,
+        member_sid: res.data.member_sid,
         nickname: res.data.nickname,
         token: res.data.token,
       })
