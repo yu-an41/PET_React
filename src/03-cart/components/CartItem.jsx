@@ -27,7 +27,7 @@ function CartItem({ cartDetails }) {
     specials,
   } = cartDetails
 
-  const [newQty, setNewQty] = useState(prodQty)
+  // const [newQty, setNewQty] = useState(prodQty)
 
   return (
     <div className="border-t-2 pt-12 py-5 px-24 bg-white">
@@ -80,6 +80,28 @@ function CartItem({ cartDetails }) {
               <input
                 className="bg-transparent focus:border-none focus:outline-none pl-1"
                 type="text"
+                value={prodQty}
+                max={inventory}
+                onChange={(e) => {
+                  let newQty = +e.target.value
+                  if (newQty === 0) {
+                    newQty = ''
+                  }
+                  dispatch(updateQty({ prodSid, newQty }))
+                  console.log(e.target.value)
+                }}
+                onBlur={(e) => {
+                  let newQty = +e.target.value
+                  if (!newQty) {
+                    newQty = 1
+                    alert('本商品最低購買數量為1！')
+                  }
+                  dispatch(updateQty({ prodSid, newQty }))
+                }}
+              />
+              {/* <input
+                className="bg-transparent focus:border-none focus:outline-none pl-1"
+                type="text"
                 value={newQty}
                 max={inventory}
                 onChange={(e) => {
@@ -88,7 +110,7 @@ function CartItem({ cartDetails }) {
                 onBlur={(e) => {
                   dispatch(updateQty({ prodSid, newQty }))
                 }}
-              />
+              /> */}
             </div>
             <div
               className="rounded-full hover:text-white hover:bg-gray-600"

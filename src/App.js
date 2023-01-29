@@ -21,15 +21,10 @@ import Products from './02-product/pages/Products'
 
 // cart
 import CartList from './03-cart/pages/CartList'
+import CartDetails from './03-cart/pages/CartDetails'
 
 // stylesheet
 import './App.scss'
-
-// const store = configureStore({
-//   reducer: {
-//     cart: cartSlice,
-//   },
-// })
 
 function App() {
   return (
@@ -48,6 +43,7 @@ function App() {
           </Route>
           <Route path="/cart/">
             <Route index path="" element={<CartList />} />
+            <Route path="confirm" element={<CartDetails />} />
           </Route>
         </Routes>
         <Footer />
