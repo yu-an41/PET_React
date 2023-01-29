@@ -57,21 +57,21 @@ const cartSlice = createSlice({
       // console.log(cartItems)
     },
     updateQty(state = initState, action) {
-      const { prodSid, prodQty } = action.payload
-      const { cartItems } = state
-
-      const index = cartItems.findIndex((e) => e.sid === prodSid)
-
-      if (cartItems[index].prodQty + prodQty <= cartItems[index].inventory) {
-        cartItems[index].prodQty += prodQty
+      const { prodSid, newQty } = action.payload
+      // const { cartItems } = state
+      console.log('prodsid:', prodSid)
+      console.log('qty: ', newQty)
+      
+      const index = state.cartItems.findIndex((e) => e.prodSid === prodSid)
+      console.log(prodSid, index)
+      if (newQty <= state.cartItems[index].inventory) {
+        state.cartItems[index].prodQty = newQty
       } else {
         alert(
-          `已達本商品最高購買量：${cartItems[index].inventory}，請重新選擇（已選購：${cartItems[index].prodQty}）`
+          `已達本商品最高購買量：${state.cartItems[index].inventory}，請重新選擇（已選購：${state.cartItems[index].prodQty}）`
         )
       }
-      cartItems[index].prodQty = prodQty
-
-      localStorage.setItem('cart', JSON.stringify(cartItems))
+      localStorage.setItem('cart', JSON.stringify(state.cartItems))
     },
     deleteItem(state = initState, action) {
       const { prodSid } = action.payload

@@ -80,15 +80,13 @@ function CartItem({ cartDetails }) {
               <input
                 className="bg-transparent focus:border-none focus:outline-none pl-1"
                 type="text"
-                value={prodQty}
+                value={newQty}
                 max={inventory}
                 onChange={(e) => {
                   setNewQty(+e.target.value)
-                  prodQty = +newQty
                 }}
-                onBlur={() => {
-                  dispatch(updateQty(prodSid, prodQty))
-                  console.log(prodSid, prodQty)
+                onBlur={(e) => {
+                  dispatch(updateQty({ prodSid, newQty }))
                 }}
               />
             </div>
