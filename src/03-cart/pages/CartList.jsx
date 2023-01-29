@@ -78,7 +78,7 @@ function CartList() {
             </div>
             <div className="flex justify-between px-12">
               <div>折價券</div>
-              <div>- $ 50</div>
+              <div>- $ 0</div>
             </div>
             <div className="flex justify-between px-12 mt-5">
               <div>共計</div>

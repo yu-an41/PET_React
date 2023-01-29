@@ -2,15 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 import { addCart } from '../../stores/cartSlice'
-import AuthContext, {userAuth} from './../../contexts/AuthContext'
+import AuthContext from './../../contexts/AuthContext'
 
 function CartDetails() {
   const navigate = useNavigate()
 
   // 會員登入狀態
-    const {userAuth} = useContext(AuthContext)
+  const { userAuth } = useContext(AuthContext)
 
   // 抓購物車資料
   const state = useSelector((state) => state.cart)
@@ -25,8 +26,16 @@ function CartDetails() {
   // 訂購資訊共用樣式
   const liClassName = ''
 
-  const goPay = () => {
-
+  const goPay = async () => {
+    if (userAuth.authorised) {
+      const res = await axios.post(
+        `http:localhost:3005/cart/linepay?`,
+        cartItems
+      )
+    } else {
+      alert('請先登入！')
+      navigate('/login')
+    }
   }
 
   useEffect(() => {
