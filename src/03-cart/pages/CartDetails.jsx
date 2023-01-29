@@ -1,16 +1,46 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 import { addCart } from '../../stores/cartSlice'
+import AuthContext, {userAuth} from './../../contexts/AuthContext'
 
 function CartDetails() {
   const navigate = useNavigate()
+
+  // 會員登入狀態
+    const {userAuth} = useContext(AuthContext)
+
+  // 抓購物車資料
+  const state = useSelector((state) => state.cart)
+  const cartItems = state.cartItems
+
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalMemberPrice, setTotalMemberPrice] = useState(0)
+
   // 付款方式
   const [payWay, setPayWay] = useState(1)
 
   // 訂購資訊共用樣式
   const liClassName = ''
+
+  const goPay = () => {
+
+  }
+
+  useEffect(() => {
+    setTotalPrice(
+      state.cartItems.reduce((acc, cur) => {
+        return acc + cur.price * cur.prodQty
+      }, 0)
+    )
+    setTotalMemberPrice(
+      state.cartItems.reduce((acc, cur) => {
+        return acc + cur.member_price * cur.prodQty
+      }, 0)
+    )
+  }, [])
 
   return (
     <div className="border mb-20 pt-20">
@@ -31,11 +61,15 @@ function CartDetails() {
           <div className="">
             <div className="flex justify-between px-12">
               <div>原價</div>
-              <div>$ </div>
+              <div>$ {totalPrice}</div>
+            </div>
+            <div className="flex justify-between px-12">
+              <div>優惠價</div>
+              <div>$ {totalMemberPrice}</div>
             </div>
             <div className="flex justify-between px-12 mt-5">
               <div>共計</div>
-              <div>項商品</div>
+              <div>{cartItems.length} 項商品</div>
             </div>
           </div>
         </div>
@@ -51,9 +85,7 @@ function CartDetails() {
         </button>
         <button
           className="font-medium text-gray-700 border bg-white p-2 rounded-lg mx-2 hover:bg-orange-700 hover:text-white hover:border-orange-700"
-          onClick={() => {
-            navigate('/cart/confirm')
-          }}
+          onClick={goPay}
         >
           前往結賬
         </button>
