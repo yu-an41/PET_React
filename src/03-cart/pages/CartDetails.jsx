@@ -28,10 +28,24 @@ function CartDetails() {
 
   const goPay = async () => {
     if (userAuth.authorised) {
-      const res = await axios.post(
-        `http:localhost:3005/cart/linepay?`,
-        cartItems
-      )
+      if (cartItems.length > 0) {
+        const order = cartItems.map((item) => {
+          return {
+            id: item.id,
+            quantity: item.quantity,
+          }
+        })
+        const res = await axios.post(`http:localhost:3005/cart/createOrder`, {
+          order,
+          member_sid: userAuth.member_sid,
+          payWay,
+        })
+        if (res.data.success) {
+          console.log(res.data.message)
+        } else {
+          console.log(res.data.message)
+        }
+      }
     } else {
       alert('請先登入！')
       navigate('/login')
