@@ -1,9 +1,10 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useRef } from 'react'
 import Slider from 'react-slick'
 
 import { imgNodeUrl } from '../../my-config'
 
 export default function HomeSlider() {
+  const slider = useRef()
   const [autoplay, setAutoplay] = useState(true)
   const [sliderSettings, setSliderSettings] = useState({
     // dots: true,
@@ -12,7 +13,7 @@ export default function HomeSlider() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    // pauseOnHover: true,
+    pauseOnHover: true,
     // responsive: [
     //   {
     //     breakpoint: 1024,
@@ -41,9 +42,17 @@ export default function HomeSlider() {
     // ],
   })
 
+  const toggleAutoplay = () => {
+    if (autoplay) {
+      slider.current.slickPause()
+    } else {
+      slider.current.slickPlay()
+    }
+    setAutoplay(!autoplay)
+  }
   return (
     <div className="my-5 p-5 bg-white w-full border shadow-md rounded-lg">
-      <Slider {...sliderSettings}>
+      <Slider {...sliderSettings} ref={slider}>
         <div className="h-full flex justify-center items-center">
           <img
             className="object-cover w-full"
@@ -68,19 +77,31 @@ export default function HomeSlider() {
       </Slider>
       <div className="w-36 md:w-48 mx-auto py-5">
         <ul className="flex justify-between items-center">
-          <li className="text-xl font-medium text-blue-400 hover:text-blue-600">
+          <li
+            className="text-xl font-medium text-blue-400 hover:text-blue-600"
+            onClick={() => {
+              slider.current.slickPrev()
+            }}
+          >
             <i className="fa-solid fa-backward"></i>
           </li>
-          {autoplay ? (
-            <li className="text-2xl font-medium text-blue-400 hover:text-blue-600">
+
+          <li
+            className="text-2xl font-medium text-blue-400 hover:text-blue-600"
+            onClick={toggleAutoplay}
+          >
+            {autoplay ? (
               <i className="fa-solid fa-pause"></i>
-            </li>
-          ) : (
-            <li className="text-xl font-medium text-blue-400 hover:text-blue-600">
+            ) : (
               <i className="fa-solid fa-play"></i>
-            </li>
-          )}
-          <li className="text-xl font-medium text-blue-400 hover:text-blue-600">
+            )}
+          </li>
+          <li
+            className="text-xl font-medium text-blue-400 hover:text-blue-600"
+            onClick={() => {
+              slider.current.slickNext()
+            }}
+          >
             <i className="fa-solid fa-forward"></i>
           </li>
         </ul>
