@@ -10,8 +10,6 @@ export const AuthContextProvider = ({ children }) => {
   const unAuth = {
     authorised: false,
     member_sid: 0,
-    // member_account: '',
-    member_nickname: '',
     token: '',
   }
 
@@ -20,12 +18,22 @@ export const AuthContextProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState(initAuth)
 
   // 取得目前狀態
+  // const auth = localStorage.getItem('auth')
+  // if (auth) {
+  //   const localAuth = JSON.parse(auth)
+  //   if(localAuth && localAuth.token){
+  //     initAuth = {...localAuth, authorised: true,}
+  //   }
+  // }
+  // }
+  // console.log(userAuth)
 
   // 登入資訊
   const [loginInfo, setLoginInfo] = useState({
     email: '',
     password: '',
   })
+
 
   // 登出
   const memberLogout = () => {
