@@ -51,7 +51,7 @@ export default function HomeSlider() {
     setAutoplay(!autoplay)
   }
   return (
-    <div className="my-5 p-5 bg-white w-full border shadow-md rounded-lg">
+    <div className="mb-5 p-5 bg-white w-full border shadow-md rounded-lg">
       <Slider {...sliderSettings} ref={slider}>
         <div className="h-full flex justify-center items-center">
           <img
