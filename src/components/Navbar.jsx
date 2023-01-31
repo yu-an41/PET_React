@@ -83,6 +83,7 @@ function Navbar() {
             </Link>
           </div>
           <Link
+            to="/#"
             onClick={(e) => {
               e.preventDefault()
               if (state.cartItems.length) {
