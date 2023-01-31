@@ -50,7 +50,7 @@ function ProductCard({ prodData }) {
 
   return (
     <div className="max-w-2xl mx-auto px-1 py-1 w-1/2 md:w-1/3 xl:w-1/4 my-3 md:my-5">
-      <div className="bg-white shadow-md rounded-lg max-w-sm">
+      <div className="bg-white shadow-md rounded-lg max-w-sm flex flex-wrap flex-col items-stretch h-full">
         <Link to="/#">
           <img
             className="rounded-t-lg p-8"
@@ -65,7 +65,7 @@ function ProductCard({ prodData }) {
             </h3>
           </Link>
         </div>
-        <div className="flex items-center mx-5 mt-2.5 mb-5 grow">
+        <div className="hidden flex items-center mx-5 mt-2.5 mb-5">
           <svg
             className="w-5 h-5 text-yellow-300"
             fill="currentColor"
@@ -110,9 +110,9 @@ function ProductCard({ prodData }) {
             5.0
           </span>
         </div>
-        <div className="flex items-center justify-between px-5 pb-5">
+        <div className="flex grow items-center justify-between px-5 pb-5">
           <span className="text-l md:text-xl font-medium text-gray-600 line-through">{`$ ${price}`}</span>
-          <span className="text-2xl md:text-3xl font-bold text-red-700 mr-3">
+          <span className="text-xl md:text-2xl font-bold text-red-700 mr-3">
             {`$ ${member_price}`}
           </span>
           <select

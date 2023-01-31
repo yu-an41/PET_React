@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import axios from 'axios'
+
 // contexts and slices
 import AuthContext, { userAuth } from './../../contexts/AuthContext'
 import { emptyCart } from '../../stores/cartSlice'
@@ -29,6 +31,39 @@ function CartList() {
   //  const [nowState, setNowState] = useState(0)
 
   const checkLogin = () => {}
+
+  const [payWay, setPayWay] = useState(2)
+
+  const goPay = async () => {
+    if (userAuth.authorised) {
+      if (cartItems.length > 0) {
+        const order = cartItems.map((item) => {
+          return {
+            id: item.prodSid,
+            quantity: item.prodQty,
+          }
+        })
+        console.log(userAuth.member_sid)
+        const { data } = await axios.post(
+          `http://localhost:3005/cart/createOrder`,
+          {
+            order,
+            member_sid: userAuth.member_sid,
+            payWay,
+          }
+        )
+        if (data.output.success) {
+          const url = data.output.url
+          window.open(url, '_self')
+        } else {
+          alert('付款失敗')
+        }
+      }
+    } else {
+      alert('請先登入！')
+      navigate('/login')
+    }
+  }
 
   useEffect(() => {
     setCartDetails(state.cartItems)
@@ -76,7 +111,7 @@ function CartList() {
               <div>優惠價</div>
               <div>$ {totalMemberPrice}</div>
             </div>
-            <div className="flex justify-between px-12">
+            <div className="hidden flex justify-between px-12">
               <div>折價券</div>
               <div>- $ 0</div>
             </div>
@@ -101,12 +136,14 @@ function CartList() {
         >
           繼續逛逛
         </button>
-        <button className="font-medium text-gray-700 border bg-white p-2 rounded-lg mx-2 hover:bg-orange-700 hover:text-white hover:border-orange-700"
-        onClick={() => {
-            navigate('/cart/confirm')
-          }}
+        <button
+          className="font-medium text-gray-700 border bg-white p-2 rounded-lg mx-2 hover:bg-orange-700 hover:text-white hover:border-orange-700"
+          // onClick={() => {
+          //   navigate('/cart/confirm')
+          // }}
+          onClick={goPay}
         >
-          前往結賬
+          LinePay 付款
         </button>
       </div>
     </div>
