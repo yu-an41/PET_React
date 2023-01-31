@@ -6,6 +6,8 @@ import { addCart } from '../stores/cartSlice'
 
 import AuthContext from '../contexts/AuthContext'
 
+import { imgNodeUrl } from '../my-config'
+
 function Navbar() {
   const navigate = useNavigate()
 
@@ -38,7 +40,9 @@ function Navbar() {
               <Link to="/">
                 <div className="w-24">
                   <img
-                    src="https://dotown.maeda-design-room.net/wp-content/uploads/2022/10/thing_dachshund_02.png"
+                    src={
+                      'https://dotown.maeda-design-room.net/wp-content/uploads/2022/10/thing_dachshund_02.png'
+                    }
                     alt=""
                   />
                 </div>
@@ -96,7 +100,8 @@ function Navbar() {
             {userAuth.authorised ? (
               <div className="flex items-center space-x-2 p-2">
                 <img
-                  src="https://plchldr.co/i/40x40?bg=111111"
+                  // src="https://plchldr.co/i/40x40?bg=111111"
+                  src={`${imgNodeUrl}/images/photos/TingStyle_1.jpg`}
                   alt="plchldr.co"
                   className="h-9 w-9 rounded-full"
                 />

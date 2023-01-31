@@ -34,7 +34,7 @@ function Login() {
 
   const memberLogin = async (e) => {
     e.preventDefault()
-    console.log(loginInfo)
+    // console.log(loginInfo)
     const res = await axios.post(
       'http://localhost:3005/member/login/api',
       loginInfo
@@ -50,6 +50,7 @@ function Login() {
         token: res.data.token,
       })
       localStorage.setItem('auth', JSON.stringify(res.data))
+      console.log(userAuth)
       alert('登入成功(๑¯◡¯๑)')
       navigate('/')
     } else {
