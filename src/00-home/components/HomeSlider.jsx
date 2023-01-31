@@ -6,7 +6,16 @@ import { imgNodeUrl } from '../../my-config'
 export default function HomeSlider() {
   const slider = useRef()
   const [autoplay, setAutoplay] = useState(true)
-  const [sliderSettings, setSliderSettings] = useState({
+  // const [sliderSettings, setSliderSettings] = useState({
+  //   infinite: true,
+  //   autoplay: autoplay,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   pauseOnHover: true,
+  // })
+
+  const sliderSettings = {
     // dots: true,
     infinite: true,
     autoplay: autoplay,
@@ -40,8 +49,7 @@ export default function HomeSlider() {
     //     },
     //   },
     // ],
-  })
-
+  }
   const toggleAutoplay = () => {
     if (autoplay) {
       slider.current.slickPause()
@@ -60,10 +68,10 @@ export default function HomeSlider() {
             alt="carousel"
           />
         </div>
-        <div className="h-full flex justify-center items-center">
+        <div className="h-full flex justify-center items-center ">
           <img
             className="object-cover w-full"
-            src={`${imgNodeUrl}/images/products/can2.jpg`}
+            src={`${imgNodeUrl}/images/products/dog-can1.jpg`}
             alt="carousel"
           />
         </div>
