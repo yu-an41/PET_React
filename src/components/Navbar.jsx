@@ -108,7 +108,9 @@ function Navbar() {
                 />
                 <div className="font-medium">{userAuth.member_nickname}</div>
                 <div>
-                  <Link onClick={memberLogout}>Logout</Link>
+                  <Link to="/#" onClick={memberLogout}>
+                    Logout
+                  </Link>
                 </div>
               </div>
             ) : (

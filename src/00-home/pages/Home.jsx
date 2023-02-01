@@ -20,7 +20,7 @@ function Home() {
             Our Team
           </h3>
         </header>
-        <div class="max-w-720 flex flex-wrap flex-row justify-center sm:mx-1 md:mx-5">
+        <div className="max-w-720 flex flex-wrap flex-row justify-center sm:mx-1 md:mx-5">
           {Array(4)
             .fill(1)
             .map((c, i) => (

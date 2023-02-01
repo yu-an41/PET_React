@@ -49,7 +49,7 @@ function ProductCard({ prodData }) {
   // }
 
   return (
-    <div className="max-w-2xl mx-auto px-1 py-1 w-1/2 md:w-1/3 xl:w-1/4 my-3 md:my-5">
+    <div className="max-w-2xl px-1 py-1 w-1/2 md:w-1/3 xl:w-1/4 my-3 md:my-5">
       <div className="bg-white shadow-md rounded-lg max-w-sm flex flex-wrap flex-col items-stretch h-full">
         <Link to="/#">
           <img

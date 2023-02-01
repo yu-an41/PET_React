@@ -7,27 +7,27 @@ function Footer() {
       <ul className="max-w:96 flex justify-center align-center list-none mx-auto">
         <li className="text-xl mx-2 text-gray-700  hover:text-orange-700 hover:border-b-2 hover:border-orange-600">
           <Link to="/#">
-            <i class="fa-brands fa-facebook"></i>
+            <i className="fa-brands fa-facebook"></i>
           </Link>
         </li>
         <li className="text-xl mx-2 text-gray-700  hover:text-orange-700 hover:border-b-2 hover:border-orange-600">
           <Link to="/#">
-            <i class="fa-brands fa-instagram"></i>
+            <i className="fa-brands fa-instagram"></i>
           </Link>
         </li>
         <li className="text-xl mx-2 text-gray-700  hover:text-orange-700 hover:border-b-2 hover:border-orange-600">
           <Link to="/#">
-            <i class="fa-brands fa-twitter"></i>
+            <i className="fa-brands fa-twitter"></i>
           </Link>
         </li>
         <li className="text-xl mx-2 text-gray-700  hover:text-orange-700 hover:border-b-2 hover:border-orange-600">
           <Link to="/#">
-            <i class="fa-brands fa-whatsapp"></i>
+            <i className="fa-brands fa-whatsapp"></i>
           </Link>
         </li>
         <li className="text-xl mx-2 text-gray-700  hover:text-orange-700 hover:border-b-2 hover:border-orange-600">
           <Link to="/#">
-            <i class="fa-brands fa-github"></i>
+            <i className="fa-brands fa-github"></i>
           </Link>
         </li>
       </ul>
