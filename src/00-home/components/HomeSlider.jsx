@@ -59,7 +59,7 @@ export default function HomeSlider() {
     setAutoplay(!autoplay)
   }
   return (
-    <div className="mb-5 p-5 bg-white w-full border shadow-md rounded-lg">
+    <div className="md:mb-5 p-3 md:p-5 bg-white w-full border shadow-md rounded-lg">
       <Slider {...sliderSettings} ref={slider}>
         <div className="h-full flex justify-center items-center">
           <img
@@ -83,10 +83,10 @@ export default function HomeSlider() {
           />
         </div>
       </Slider>
-      <div className="w-36 md:w-48 mx-auto py-5">
+      <div className="w-28 md:w-48 mx-auto py-1 md:py-5">
         <ul className="flex justify-between items-center">
           <li
-            className="text-xl font-medium text-blue-400 hover:text-blue-600"
+            className="text-m md:text-xl md:font-medium text-blue-400 hover:text-blue-600"
             onClick={() => {
               slider.current.slickPrev()
             }}
@@ -95,7 +95,7 @@ export default function HomeSlider() {
           </li>
 
           <li
-            className="text-2xl font-medium text-blue-400 hover:text-blue-600"
+            className="text-xl md:text-2xl font-medium text-blue-400 hover:text-blue-600"
             onClick={toggleAutoplay}
           >
             {autoplay ? (
@@ -105,7 +105,7 @@ export default function HomeSlider() {
             )}
           </li>
           <li
-            className="text-xl font-medium text-blue-400 hover:text-blue-600"
+            className="text-m md:text-xl font-medium text-blue-400 hover:text-blue-600"
             onClick={() => {
               slider.current.slickNext()
             }}

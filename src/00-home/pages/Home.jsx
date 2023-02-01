@@ -8,7 +8,7 @@ import HomeSlider from '../components/HomeSlider'
 
 function Home() {
   return (
-    <div className="pt-24">
+    <div className="pt-12 md:pt-24">
       <section className="px-16 mb-8">
         {/* <HomeCarousel /> */}
         <HomeSlider />
