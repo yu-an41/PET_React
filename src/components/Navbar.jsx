@@ -174,28 +174,25 @@ function Navbar() {
             </Link>
             <div className="">
               {userAuth.authorised ? (
-                <div className="flex items-center space-x-1">
+                <div className="flex justify-between items-center">
                   <img
                     src={`${imgNodeUrl}/images/photos/TingStyle_1.jpg`}
                     alt="plchldr.co"
-                    className="h-6 w-6 rounded-full"
+                    className="h-6 w-6 rounded-full mx-1"
                   />
                   <div className="font-medium">{userAuth.member_nickname}</div>
-                  {/* <div className="mr-5">
-                    {menuDrop ? (
-                      <i className="fa-solid fa-circle-caret-down"></i>
-                    ) : (
-                      <i className="fa-solid fa-circle-caret-up"></i>
-                    )}
-                  </div> */}
-                  <img
-                    src={`${imgNodeUrl}/images/photos/DaStyle_1.jpg`}
-                    alt="menu drop down"
-                    className="h-6 w-6 rounded-full"
+                  <div
+                    className="w-6"
                     onClick={() => {
                       setMenuDrop(!menuDrop)
                     }}
-                  />
+                  >
+                    {menuDrop ? (
+                      <i className="fa-solid fa-close text-xl"></i>
+                    ) : (
+                      <i class="fa-solid fa-bars text-xl "></i>
+                    )}
+                  </div>
                   <div className="hidden">
                     <Link to="/#" onClick={memberLogout} className="text-sm">
                       登出
@@ -217,28 +214,28 @@ function Navbar() {
               )}
             </div>
           </header>
-          {menuDrop ? (
-            <div className="fixed z-10 w-24 flex flex-col items-center justify-between px-3 pb-1 text-sm right-0 top-9 bg-orange-100 divide-y divide-slate-200">
-              <Link to="/products/" className="w-full space-x-1 text:gray-500">
-                Products
-              </Link>
-              <Link to="/#" className="w-full space-x-1 text:gray-500">
-                Events
-              </Link>
-              <Link to="/#" className="w-full space-x-1 text:gray-500">
-                News
-              </Link>
-              <Link
-                to="/member"
-                className="w-full space-x-1 text:gray-500"
-                onClick={(e) => checkLogin(e)}
-              >
-                Member
-              </Link>
-            </div>
-          ) : (
-            <></>
-          )}
+          <div
+            className={`fixed z-10 w-24 flex flex-col items-center justify-between px-3 pb-1 text-sm right-0 top-9 bg-orange-100 divide-y divide-slate-200 transition-all duration-700 ${
+              menuDrop ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Link to="/products/" className="w-full space-x-1 text:gray-500">
+              Products
+            </Link>
+            <Link to="/#" className="w-full space-x-1 text:gray-500">
+              Events
+            </Link>
+            <Link to="/#" className="w-full space-x-1 text:gray-500">
+              News
+            </Link>
+            <Link
+              to="/member"
+              className="w-full space-x-1 text:gray-500"
+              onClick={(e) => checkLogin(e)}
+            >
+              Member
+            </Link>
+          </div>
         </div>
       )}
     </>
