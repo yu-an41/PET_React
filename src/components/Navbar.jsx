@@ -18,6 +18,8 @@ function Navbar() {
 
   const width = window.innerWidth
 
+  const [mobileMenu, setMobileMenu] = useState(false)
+
   const [menuDrop, setMenuDrop] = useState(false)
 
   const checkLogin = (e) => {
@@ -33,6 +35,14 @@ function Navbar() {
   useEffect(() => {
     setCartDetails(state.cartItems)
   }, [state.cartItems])
+
+  useEffect(() => {
+    if (window <= 390) {
+      setMobileMenu(true)
+    } else {
+      setMobileMenu(false)
+    }
+  }, [width])
   return (
     <>
       {width > 390 ? (
