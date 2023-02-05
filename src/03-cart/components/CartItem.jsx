@@ -29,6 +29,7 @@ function CartItem({ cartDetails }) {
 
   // const [newQty, setNewQty] = useState(prodQty)
 
+
   return (
     <div className="border-t-2 pt-12 py-5 px-24 bg-white">
       <Link to="/#">
@@ -94,7 +95,7 @@ function CartItem({ cartDetails }) {
                   let newQty = +e.target.value
                   if (!newQty) {
                     newQty = 1
-                    alert('本商品最低購買數量為1！')
+                    // alert('本商品最低購買數量為1！')
                   }
                   dispatch(updateQty({ prodSid, newQty }))
                 }}

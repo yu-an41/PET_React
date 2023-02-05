@@ -95,9 +95,11 @@ function CartList() {
       <div className="lg:flex flex-wrap">
         <div className="lg:w-1/2 bg-red-100">
           <div className="border-b-2 bg-gray-200 px-6 py-12">
-            {cartDetails?.map((v, i) => (
-              <CartItem key={i} cartDetails={v} />
-            ))}
+            {cartDetails.length ? (
+              cartDetails.map((v, i) => <CartItem key={i} cartDetails={v} />)
+            ) : (
+              <div className="text-xl font-medium">購物車無任何商品！</div>
+            )}
           </div>
         </div>
         <div className="lg:w-1/2 bg-gray-300 px-20 py-12">
@@ -138,12 +140,17 @@ function CartList() {
         </button>
         <button
           className="font-medium text-gray-700 border bg-white p-2 rounded-lg mx-2 hover:bg-orange-700 hover:text-white hover:border-orange-700"
-          // onClick={() => {
-          //   navigate('/cart/confirm')
-          // }}
-          onClick={goPay}
+          onClick={() => {
+            if (cartItems.length) {
+              navigate('/cart/confirm')
+            } else {
+              alert('購物車內無任何商品！')
+              navigate('/products/')
+            }
+          }}
+          // onClick={goPay}
         >
-          LinePay 付款
+          前往結帳
         </button>
       </div>
     </div>
