@@ -74,18 +74,18 @@ function Navbar() {
             >
               Forum
             </Link> */}
-            <Link
+            {/* <Link
               to="/#"
               className="font-medium transition hover:text-blue-600 "
             >
               Events
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
               to="/#"
               className="font-medium transition hover:text-blue-600 "
             >
               News
-            </Link>
+            </Link> */}
             <Link
               to="/member"
               className="font-medium transition hover:text-blue-600"
