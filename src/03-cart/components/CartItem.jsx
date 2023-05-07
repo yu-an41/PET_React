@@ -29,7 +29,6 @@ function CartItem({ cartDetails }) {
 
   // const [newQty, setNewQty] = useState(prodQty)
 
-
   return (
     <div className="border-t-2 pt-12 py-5 px-24 bg-white">
       <Link to="/#">
@@ -44,7 +43,7 @@ function CartItem({ cartDetails }) {
       <div className="details flex jusitfy-between w-full mb-3">
         <div className="details-left w-1/2">
           <p>
-            商品編號： {category}00{prodSid.toString().padStart(2, '0')}
+            商品編號： {category}00{prodSid?.toString().padStart(2, '0')}
           </p>
           <Link to="/#">
             <div className="text-2xl font-medium text-orange-800 my-2">

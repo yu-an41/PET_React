@@ -95,7 +95,7 @@ function CartList() {
       <div className="lg:flex flex-wrap">
         <div className="lg:w-1/2 bg-red-100">
           <div className="border-b-2 bg-gray-200 px-6 py-12">
-            {cartDetails.length ? (
+            {cartDetails?.length ? (
               cartDetails.map((v, i) => <CartItem key={i} cartDetails={v} />)
             ) : (
               <div className="text-xl font-medium">購物車無任何商品！</div>

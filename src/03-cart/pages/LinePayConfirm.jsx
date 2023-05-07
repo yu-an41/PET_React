@@ -16,7 +16,7 @@ function LinePayConfirm() {
       `http://localhost:3005/cart/linePayConfirm?transactionId=${transactionId}&orderId=${orderId}`
     )
     console.log(data)
-    if (data.success) {
+    if (data.output.success) {
       console.log('資料庫完成修改')
       navigate('/')
       // 導到訂單完成頁
